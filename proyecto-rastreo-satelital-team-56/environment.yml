@@ -1,0 +1,30 @@
+name: "env"
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
+dependencies:
+  - invoke
+  - ipython
+  - ipywidgets
+  - nbdime
+  - matplotlib
+  - notebook
+  - pandas
+  - pandas-profiling
+  - numpy
+  - pathlib
+  - pip
+  - pyprojroot
+  - python-dotenv
+  - python-dotenv
+  - awscli
+  # - click
+  # - Sphix
+  # - coverage
+  # - flake8
+
+  - python
+  # - pip:
+  #   - -e . #local package
+prefix: "./env"
