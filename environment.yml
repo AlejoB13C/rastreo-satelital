@@ -1,4 +1,4 @@
-name: "env"
+name: "venv"
 channels:
   - anaconda
   - conda-forge
@@ -19,12 +19,15 @@ dependencies:
   - python-dotenv
   - python-dotenv
   - awscli
+  - openpyxl
+  - sqlalchemy
   # - click
   # - Sphix
   # - coverage
   # - flake8
 
   - python
-  # - pip:
+  - pip:
+    - xlsx2csv
   #   - -e . #local package
-prefix: "./env"
+prefix: ./env
