@@ -18,79 +18,110 @@ app.title = 'Tiempos de viaje'
 # Layout
 app.layout = dbc.Container([
     dbc.Row([
-        html.H1("Rastreo Satelital", id="ds4a__title", className="h-50 p-1 bg-light borderrounded-3"),
-        html.P("""Tiempo de viaje:
-               Aqui se inserta una breve descripcióndel aplicativo..."""),
-        dbc.Row([
-            dbc.Col([
-                # dbc.Row([
-                #     html.P("Seleccione el día a simular:")
-                # ]),
+        html.H1('Tiempos de viaje'),
+        html.P('Este dashboard muestra el tiempo de viaje de una ciudad a otra.'),
+    ]),
+    dbc.Row([
+        dbc.Col([
+            html.Div([
                 dbc.Row([
-                    html.Div([
-                        dcc.Dropdown(id="demo__dropdown", options=[{"label":'Lunes', "value":1},
-                                                                   {"label":'Martes', "value":2},
-                                                                   {"label":'Miercoles', "value":3}],
-                                     value='Lunes', placeholder="Seleccione el día a simular"),
-                    ],id="dd-output__container")
-                ]),
-                html.P("Seleccione la hora de salida:"),
-                dbc.Row([
-                    dbc.Col([
-                        html.Div([
-                            dcc.Dropdown(id='demo-dropdown2', options=[{"label":'00', "value":0},
-                                                                       {"label":'01', "value":1},
-                                                                       {"label":'02', "value":2}], 
-                                         value='00')
-                        ], id='dd-output__container_2')
-                    ]),
-                    dbc.Col([
-                        html.Div([
-                            dcc.Dropdown(id='demo-dropdown3',  options=[{"label":'00', "value":0},
-                                                                       {"label":'10', "value":1},
-                                                                       {"label":'20', "value":2}],
-                                         value='00')
-                        ], id='dd-output__container_3')
-                    ]),
-                    dbc.Col([
-                        html.Div([
-                            dcc.Dropdown(id='demo-dropdown4', options=[{"label":'am', "value":0},
-                                                                       {"label":'pm', "value":1}],
-                                         value='am')
-                        ],id='dd-output-container4')
-                    ]),
+                    dcc.Textarea(className='address-input',placeholder='Direccion de origen'),
                 ]),
                 dbc.Row([
-                    html.P("Indique el origen y el destino"),
-                    dbc.Row([
-                        html.Div([
-                            dcc.Textarea(id='textarea-state-example',value='Input: Direccion de origen',style={'width': '100%', 'height':40})
-                        ])
-                    ]),
-                    dbc.Row([
-                        html.Div([
-                            dcc.Textarea(id='textarea-state-example2',value='Input: Direccion de destino',style={'width': '100%', 'height':40})
-                        ])
-                    ])
+                    dcc.Textarea(className='address-input',placeholder='Direccion de destino'),
+
                 ]),
                 dbc.Row(
                     html.Button(id="nclicks-1__button", n_clicks=0, children="Estimar")
                 ),
-                dbc.Row(
-                    dbc.Col([
-                        html.P("La hora estimada de llegada es: "),
-                        html.Div([
-                            dcc.Textarea(id='textarea-state-example3',value='Output: Hora de llegada',style={'width': '100%', 'height':40})
-                        ])
-                    ])
-                )
-            ])
+            ], className='address-input-container'),
         ]),
-        dbc.Col(
-            dcc.Graph(figure=fig)
-        )
-    ])
+        dbc.Col([
+            html.Div([
+                dbc.Row([
+                    dcc.Graph(id='map-plot', figure=fig),
+                ]),
+            ], className='map-container'),
+        ])
+    ]),
 ])
+
+# Layout
+# app.layout = dbc.Container([
+#     dbc.Row([
+#         html.H1("Rastreo Satelital", id="ds4a__title", className="h-50 p-1 bg-light borderrounded-3"),
+#         html.P("""Tiempo de viaje:
+#                Aqui se inserta una breve descripcióndel aplicativo..."""),
+#         dbc.Row([
+#             dbc.Col([
+#                 # dbc.Row([
+#                 #     html.P("Seleccione el día a simular:")
+#                 # ]),
+#                 dbc.Row([
+#                     html.Div([
+#                         dcc.Dropdown(id="demo__dropdown", options=[{"label":'Lunes', "value":1},
+#                                                                    {"label":'Martes', "value":2},
+#                                                                    {"label":'Miercoles', "value":3}],
+#                                      value='Lunes', placeholder="Seleccione el día a simular"),
+#                     ],id="dd-output__container")
+#                 ]),
+#                 html.P("Seleccione la hora de salida:"),
+#                 dbc.Row([
+#                     dbc.Col([
+#                         html.Div([
+#                             dcc.Dropdown(id='demo-dropdown2', options=[{"label":'00', "value":0},
+#                                                                        {"label":'01', "value":1},
+#                                                                        {"label":'02', "value":2}], 
+#                                          value='00')
+#                         ], id='dd-output__container_2')
+#                     ]),
+#                     dbc.Col([
+#                         html.Div([
+#                             dcc.Dropdown(id='demo-dropdown3',  options=[{"label":'00', "value":0},
+#                                                                        {"label":'10', "value":1},
+#                                                                        {"label":'20', "value":2}],
+#                                          value='00')
+#                         ], id='dd-output__container_3')
+#                     ]),
+#                     dbc.Col([
+#                         html.Div([
+#                             dcc.Dropdown(id='demo-dropdown4', options=[{"label":'am', "value":0},
+#                                                                        {"label":'pm', "value":1}],
+#                                          value='am')
+#                         ],id='dd-output-container4')
+#                     ]),
+#                 ]),
+#                 dbc.Row([
+#                     html.P("Indique el origen y el destino"),
+#                     dbc.Row([
+#                         html.Div([
+#                             dcc.Textarea(id='textarea-state-example',value='Input: Direccion de origen',style={'width': '100%', 'height':40})
+#                         ])
+#                     ]),
+#                     dbc.Row([
+#                         html.Div([
+#                             dcc.Textarea(id='textarea-state-example2',value='Input: Direccion de destino',style={'width': '100%', 'height':40})
+#                         ])
+#                     ])
+#                 ]),
+#                 dbc.Row(
+#                     html.Button(id="nclicks-1__button", n_clicks=0, children="Estimar")
+#                 ),
+#                 dbc.Row(
+#                     dbc.Col([
+#                         html.P("La hora estimada de llegada es: "),
+#                         html.Div([
+#                             dcc.Textarea(id='textarea-state-example3',value='Output: Hora de llegada',style={'width': '100%', 'height':40})
+#                         ])
+#                     ])
+#                 )
+#             ])
+#         ]),
+#         dbc.Col(
+#             dcc.Graph(figure=fig)
+#         )
+#     ])
+# ])
 
 # app.layout = dbc.Container([dbc.Row([html.H1('Rastreo Satelital',id="ds4a-title", className="h-50 p-1 bg-light borderrounded-3"),
 # html.Div(children='''Tiempo de viaje: Aqui se inserta una breve descripcióndel aplicativo...''')]),
