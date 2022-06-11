@@ -19,32 +19,44 @@ app.title = 'Tiempos de viaje'
 app.layout = dbc.Container([
     dbc.Row([
         html.H1("Rastreo Satelital", id="ds4a__title", className="h-50 p-1 bg-light borderrounded-3"),
-        html.P("Tiempo de viaje: Aqui se inserta una breve descripcióndel aplicativo..."),
+        html.P("""Tiempo de viaje:
+               Aqui se inserta una breve descripcióndel aplicativo..."""),
         dbc.Row([
             dbc.Col([
-                dbc.Row([
-                    html.P("Seleccione el día a simular:")
-                ]),
+                # dbc.Row([
+                #     html.P("Seleccione el día a simular:")
+                # ]),
                 dbc.Row([
                     html.Div([
-                        dcc.Dropdown(id="demo__dropdown", options=['Lunes', 'Martes', 'Miercoles'], value='Lunes'),
+                        dcc.Dropdown(id="demo__dropdown", options=[{"label":'Lunes', "value":1},
+                                                                   {"label":'Martes', "value":2},
+                                                                   {"label":'Miercoles', "value":3}],
+                                     value='Lunes', placeholder="Seleccione el día a simular"),
                     ],id="dd-output__container")
                 ]),
                 html.P("Seleccione la hora de salida:"),
                 dbc.Row([
                     dbc.Col([
                         html.Div([
-                            dcc.Dropdown(id='demo-dropdown2', options=['00', '01', '02'], value='00')
+                            dcc.Dropdown(id='demo-dropdown2', options=[{"label":'00', "value":0},
+                                                                       {"label":'01', "value":1},
+                                                                       {"label":'02', "value":2}], 
+                                         value='00')
                         ], id='dd-output__container_2')
                     ]),
                     dbc.Col([
                         html.Div([
-                            dcc.Dropdown(id='demo-dropdown3', options=['00', '10', '20'], value='00')
+                            dcc.Dropdown(id='demo-dropdown3',  options=[{"label":'00', "value":0},
+                                                                       {"label":'10', "value":1},
+                                                                       {"label":'20', "value":2}],
+                                         value='00')
                         ], id='dd-output__container_3')
                     ]),
                     dbc.Col([
                         html.Div([
-                            dcc.Dropdown(id='demo-dropdown4', options=['am', 'pm'], value='am')
+                            dcc.Dropdown(id='demo-dropdown4', options=[{"label":'am', "value":0},
+                                                                       {"label":'pm', "value":1}],
+                                         value='am')
                         ],id='dd-output-container4')
                     ]),
                 ]),
@@ -112,5 +124,4 @@ app.layout = dbc.Container([
 # Callbacks
 # Start the server
 if __name__ == '__main__':
-    print('hola')
-    app.run_server(host="0.0.0.0", port="8050", debug=True)
+    app.run_server(host="0.0.0.0", port="8051", debug=True)
