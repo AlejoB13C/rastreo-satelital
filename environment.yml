@@ -19,6 +19,7 @@ dependencies:
   - python-dotenv
   - python-dotenv
   - awscli
+  - dash
   # - click
   # - Sphix
   # - coverage
