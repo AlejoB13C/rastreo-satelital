@@ -10,7 +10,7 @@ hours = pd.DataFrame({"Hours":[x for x in range(24)], "Value":[x for x in range(
 
 #set the mapplot
 fig = px.line_mapbox(us_cities, lat="lat", lon="lon", zoom=12)
-fig.update_layout(mapbox_style="stamen-terrain", mapbox_zoom=4, mapbox_center_lat= 4.65,
+fig.update_layout(mapbox_style="stamen-terrain", mapbox_zoom=10, mapbox_center_lat= 4.65,
     mapbox_center_lon= -74.1, margin={"r":0,"t":0,"l":0,"b":0})
 
 #set the daysplot
@@ -24,21 +24,44 @@ app = Dash(__name__, assets_url_path='./assets', external_stylesheets=[dbc.theme
 app.title = 'Tiempos de viaje'
 
 # Layout
+def address__input(text):
+    return html.Div([
+        dbc.Label(f"{text}", html_for=f"direccion-{text}__input"),
+        dbc.Col([
+            dbc.Input(
+                id=f"direccion-{text}__input",
+                type="text",
+                placeholder=f"dirección de {text}"
+            ),
+        ], width=12)
+    ])
+
 sidebar = dbc.Card([
-    dbc.Row([
-        dbc.Col([
-            dcc.Textarea(className='address-input',placeholder='Direccion de origen'),
-        ]),
-    ]),
-    dbc.Row([
-        dbc.Col([
-            dcc.Textarea(className='address-input',placeholder='Direccion de destino'),
-        ]),
-    ]),
+    address__input("origen"),
+    address__input("destino"),
     dbc.Row(
-        html.Button(id="nclicks-1__button", n_clicks=0, children="Estimar")
-    ),
-], body=True, )
+        dbc.Col(
+            dbc.Button("Estimar", color="primary"),
+            width=3
+        ),
+        align="baseline",
+        justify="end",
+        style={"margin-top": "10px",
+               "margin-right": "10px"}
+    )
+])
+
+titulo = [html.H1('Tiempos de viaje'),
+    html.Hr(),
+    html.P('Este dashboard muestra el tiempo de viaje de una ciudad a otra.')]
+
+mapa =html.Div([
+    dbc.Row([
+        dbc.Col([
+            dcc.Graph(id='map-plot', figure=fig),
+        ]),
+    ]),
+], className='map-container')
 
 plots_bottom = dbc.Row([
     dbc.Col([
@@ -54,22 +77,14 @@ plots_bottom = dbc.Row([
 ])
 
 app.layout = dbc.Container([
-    html.H1('Tiempos de viaje'),
-    html.Hr(),
-    html.P('Este dashboard muestra el tiempo de viaje de una ciudad a otra.'),
+    *titulo,
     dbc.Row([
-        dbc.Col([sidebar]),
+        dbc.Col(sidebar,width=2),
         dbc.Col([
-            html.Div([
-                dbc.Row([
-                    dbc.Col([
-                        dcc.Graph(id='map-plot', figure=fig),
-                    ]),
-                ]),
-            ], className='map-container'),
-        ], width={'size': 8, 'order': 2}),
+            dbc.Row(mapa), 
+            dbc.Row(plots_bottom)], 
+            width={'size': 8, 'order': 2}),
     ]),
-    plots_bottom,
 ], fluid=True, style={"background-color": "#f5f5f5"})
 
 # Callbacks
