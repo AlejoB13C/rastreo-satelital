@@ -5,56 +5,17 @@ from plotly import express as px
 from dotenv import load_dotenv
 import os
 
-map_token = os.getenv("MAPBOX_API_TOKEN")
-map_style = os.getenv("MAP_STYLE")
-load_dotenv("../../.env")
+from dash_labs.plugins import register_page
 
-#Import Data
-us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
-days = pd.DataFrame({"Day":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "Value":[1,2,3,4,5,6,7]})
-hours = pd.DataFrame({"Hours":[x for x in range(24)], "Value":[x for x in range(24)]})
+from proyecto_rastreo_satelital_team_56.components import map_plot, temp_plot1, temp_plot2
+from proyecto_rastreo_satelital_team_56.data import import_temp_data
 
-#set the mapplot
-fig = px.line_mapbox(us_cities, lat="lat", lon="lon", zoom=12)
-fig.update_layout(mapbox_zoom=10, mapbox_center_lat= 4.65,
-    mapbox_center_lon= -74.1, margin={"r":0,"t":0,"l":0,"b":0},
-    mapbox= dict(
-        accesstoken = map_token,
-        style = map_style
-    )
-)
 
-#set the daysplot
-data=[[1, 25, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, 5, 20]]
-fig2 = px.imshow(data,
-                labels=dict(x="Day of Week", y="Time of Day", color="Productivity"),
-                x=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-                y=['Morning', 'Afternoon', 'Evening']
-               )
-fig2.update_layout({
-    "plot_bgcolor": "rgba(0, 0, 0, 0)",
-    "paper_bgcolor": "rgba(0, 0, 0, 0)",
-    "font_color": "lightgrey",
-})
+register_page(__name__)
 
-#set the hoursplot
-fig3 = px.bar(hours, x="Hours", y="Value", color="Value")
-
-fig3.update_layout({
-    "plot_bgcolor": "rgba(0, 0, 0, 0)",
-    "paper_bgcolor": "rgba(0, 0, 0, 0)",
-    "font_color": "lightgrey",
-})
-
-# Create the app
-url_theme1 = dbc.themes.FLATLY
-url_theme2 = dbc.themes.DARKLY
-dbc_css = (
-    "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
-)
-app = Dash(__name__, assets_url_path='./assets', external_stylesheets=[url_theme1, dbc_css])
-
-app.title = 'Tiempos de viaje'
+fig = map_plot.map_plot         #Set map plot
+fig2 = temp_plot1.daysplot      #set the daysplot
+fig3 = temp_plot2.hoursplot     #set the hoursplot
 
 main_blue= "#162f41"
 secondary_blue= "#2c3e50"
@@ -154,7 +115,8 @@ plots_bottom = dbc.Row([
     ],md=5),
 ])
 
-app.layout = dbc.Container(
+def layout():
+    return dbc.Container(
         [    
             html.Div(titulo, className="p-4 mb-2", style={"margin": "10px"}),
             dbc.Row(
@@ -174,7 +136,7 @@ app.layout = dbc.Container(
     style={"padding": "0px", "background-color": main_blue}
 )
 
-# Callbacks
-# Start the server
-if __name__ == '__main__':
-    app.run_server(host="0.0.0.0", port="8051", debug=True)
+# # Callbacks
+# # Start the server
+# if __name__ == '__main__':
+#     app.run_server(host="0.0.0.0", port="8051", debug=True)
