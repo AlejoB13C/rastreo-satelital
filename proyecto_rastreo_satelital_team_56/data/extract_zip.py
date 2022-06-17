@@ -45,9 +45,7 @@ def csv_convert(data):
     
     call(["xlsx2csv", data_file, new_path.as_posix().replace(" ","_")+"/", "-a"])
 
-
-    pathlib.Path(data_file).unlink()
-    pathlib.Path(data_file.rsplit("/",1)[0]).rmdir()
+    return data_name, data_file
 
 
 def zip_iter(ZIP_FILE):
@@ -57,25 +55,10 @@ def zip_iter(ZIP_FILE):
         
         for data in zip.infolist():
             
-            csv_convert(data)
+            data_name, data_file = csv_convert(data)
             print(f"{done_files}/{total_files} working on: {data_name}")
             done_files += 1
-            
-            
-            data_name = data.filename
-            if check_done("./done.txt", data_name):
-                continue
-            zip.extract(data, DATA_RAW.as_posix())
-                    
-            data_file = DATA_RAW.as_posix()+"/"+data_name # Extracted file path and name
-            
-            new_path = DATA_CSV.joinpath(*data_name.rstrip(".xlsx").split("/")) # Create the path for the sheets
-            if not new_path.exists():
-                new_path.mkdir(parents=True)
-            
-            call(["xlsx2csv", data_file, new_path.as_posix().replace(" ","_")+"/", "-a"])
 
-            
             pathlib.Path(data_file).unlink()
             pathlib.Path(data_file.rsplit("/",1)[0]).rmdir()
 
@@ -87,3 +70,5 @@ if __name__ == "__main__":
     DATA_CSV = CURRENT_DIR.parent.joinpath("data", "interm") # Destination Path
     ZIP_FILE = DATA_RAW.as_posix()+".zip" # Zip file name
     DOT_ENV = CURRENT_DIR.as_posix()+"/.env"
+
+    zip_iter(ZIP_FILE)
