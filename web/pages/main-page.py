@@ -1,13 +1,8 @@
-import pandas as pd
-from dash import Dash, html, dcc
+from dash import html, dcc
 import dash_bootstrap_components as dbc
-from plotly import express as px
-from dotenv import load_dotenv
-import os
-
 from dash_labs.plugins import register_page
 
-from proyecto_rastreo_satelital_team_56.components import map_plot, temp_plot1, temp_plot2
+from proyecto_rastreo_satelital_team_56.components import map_plot, temp_plot1, temp_plot2, page_title
 from proyecto_rastreo_satelital_team_56.data import import_temp_data
 
 
@@ -88,12 +83,6 @@ sidebar = dbc.Card([
 ],body=True, style={"font_color":"white"}
 )
 
-titulo = [
-    html.H3('Tiempos de viaje', className="bg-primary text-white p-4 mb-2"),
-    html.Hr(style={"color": "#FFFFFF"}),
-    html.H6('Este dashboard muestra el tiempo de viaje de una ciudad a otra.', className="p-4 mb-2 text-white", style={"background-color": secondary_blue}),
-    ]
-
 mapa =html.Div([
     dbc.Row([
         dbc.Col([
@@ -118,7 +107,6 @@ plots_bottom = dbc.Row([
 def layout():
     return dbc.Container(
         [    
-            html.Div(titulo, className="p-4 mb-2", style={"margin": "10px"}),
             dbc.Row(
                 [
                     dbc.Col(sidebar, md=2, style={'background-color': main_blue}),
@@ -135,8 +123,3 @@ def layout():
     fluid=True,
     style={"padding": "0px", "background-color": main_blue}
 )
-
-# # Callbacks
-# # Start the server
-# if __name__ == '__main__':
-#     app.run_server(host="0.0.0.0", port="8051", debug=True)
