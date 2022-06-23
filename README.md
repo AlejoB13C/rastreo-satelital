@@ -1,13 +1,13 @@
 # Proyecto Rastreo Satelital Team 56
 
-Proyecto del equipo 56 de DS4A Colombia Cohort 6 con Rastreo Satelital
-Created by:
-Alejandro Borda @AlejoB13C
-Alejandro Yepes @ayepesp
-Alejandro Ceren @alejoceren
-David Niño @dmateons
-Luis @1treu1
-Nicolas @Jonigaro
+Proyecto del equipo 56 de DS4A Colombia Cohort 6 con Rastreo Satelital  
+Created by:  
+Alejandro Borda [@AlejoB13C](https://github.com/AlejoB13C)  
+Alejandro Yepes [@ayepesp](https://github.com/ayepesp)  
+Alejandro Ceren [@AleYepes823](https://github.com/AleYepes823)  
+David Niño [@dmninos](https://github.com/dmninos)    
+Luis [@1treu1](https://github.com/1treu1)  
+Nicolas [@NicoGaRo](https://github.com/NicoGaRo)  
 
 ## Installation guide
 
