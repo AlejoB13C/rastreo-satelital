@@ -16,10 +16,6 @@ hours = pd.DataFrame({"Hours":[x for x in range(24)], "Value":[x for x in range(
 
 #set the mapplot
 fig = px.line_mapbox(us_cities, lat="lat", lon="lon", zoom=12)
-<<<<<<< HEAD
-fig.update_layout(mapbox_style="stamen-terrain", mapbox_zoom=10, mapbox_center_lat= 4.65,
-    mapbox_center_lon= -74.1, margin={"r":0,"t":0,"l":0,"b":0})
-=======
 fig.update_layout(mapbox_zoom=10, mapbox_center_lat= 4.65,
     mapbox_center_lon= -74.1, margin={"r":0,"t":0,"l":0,"b":0},
     mapbox= dict(
@@ -27,7 +23,6 @@ fig.update_layout(mapbox_zoom=10, mapbox_center_lat= 4.65,
         style = map_style
     )
 )
->>>>>>> fronted/styles
 
 #set the daysplot
 data=[[1, 25, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, 5, 20]]
@@ -78,25 +73,6 @@ def address__input(text):
     ])
 
 sidebar = dbc.Card([
-<<<<<<< HEAD
-    address__input("origen"),
-    address__input("destino"),
-    dbc.Row(
-        dbc.Col(
-            dbc.Button("Estimar", color="primary"),
-            width=3
-        ),
-        align="baseline",
-        justify="end",
-        style={"margin-top": "10px",
-               "margin-right": "10px"}
-    )
-])
-
-titulo = [html.H1('Tiempos de viaje'),
-    html.Hr(),
-    html.P('Este dashboard muestra el tiempo de viaje de una ciudad a otra.')]
-=======
     html.Div(
         [
             address__input("origen"),
@@ -156,7 +132,6 @@ titulo = [
     html.Hr(style={"color": "#FFFFFF"}),
     html.H6('Este dashboard muestra el tiempo de viaje de una ciudad a otra.', className="p-4 mb-2 text-white", style={"background-color": secondary_blue}),
     ]
->>>>>>> fronted/styles
 
 mapa =html.Div([
     dbc.Row([
@@ -179,18 +154,6 @@ plots_bottom = dbc.Row([
     ],md=5),
 ])
 
-<<<<<<< HEAD
-app.layout = dbc.Container([
-    *titulo,
-    dbc.Row([
-        dbc.Col(sidebar,width=2),
-        dbc.Col([
-            dbc.Row(mapa), 
-            dbc.Row(plots_bottom)], 
-            width={'size': 8, 'order': 2}),
-    ]),
-], fluid=True, style={"background-color": "#f5f5f5"})
-=======
 app.layout = dbc.Container(
         [    
             html.Div(titulo, className="p-4 mb-2", style={"margin": "10px"}),
@@ -210,7 +173,6 @@ app.layout = dbc.Container(
     fluid=True,
     style={"padding": "0px", "background-color": main_blue}
 )
->>>>>>> fronted/styles
 
 # Callbacks
 # Start the server
