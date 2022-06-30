@@ -19,5 +19,6 @@ map_plot.update_layout(mapbox_zoom=10, mapbox_center_lat= 4.65,
     mapbox= dict(
         accesstoken = map_token,
         style = map_style
-    )
+    ),
+    # height=720
 )

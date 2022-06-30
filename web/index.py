@@ -22,7 +22,7 @@ navbar = dbc.NavbarSimple(
     brand="Travel Times",
     color="primary",
     dark=True,
-    className="mb-2",
+    className="mb-2 h-10",
 )
 
 app.title = 'Tiempos de viaje'
@@ -32,8 +32,8 @@ app.layout =  dbc.Container(
         # html.Div(page_title.title, className="p-4 mb-2", style={"margin": "10px"}),
         dl.plugins.page_container,
     ],
-    style={"padding": "0px", "background-color": main_blue, "margin": "0px"},
-    className="dbc",
+    style={"padding": "0px", "background-color": main_blue, "margin": "0px", "height": "100vh"},
+    className="dbc h-100",
     fluid=True,
 )
 

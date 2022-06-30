@@ -18,24 +18,20 @@ sidebar = sidebar.sidebar
 mapa =html.Div([
     dbc.Row([
         dbc.Col([
-            dcc.Graph(id='map-plot', figure=fig),
+            dcc.Graph(id='map-plot', figure=fig, style={'height': '89.5vh'}),
         ]),
     ]),
 ], className='map-container')
 
 def layout():
-    return html.Div(
-        [    
-            dbc.Row(
+    return dbc.Row(
                 [
-                    dbc.Col(sidebar, md=2, style={'background-color': main_blue}),
+                    dbc.Col(sidebar, md=2, style={'background-color': main_blue, 'height': '100%'}),
                     dbc.Col(
                         [                                
                             dbc.Row(mapa),   
-                        ], md=10, style={'background-color': main_blue}
+                        ], md=10, style={'background-color': main_blue, 'height': '100%'}
                     )
                 ],
+                className="map-container h-100"
             )
-        ],
-    style={"padding": "0px", "background-color": main_blue}
-)

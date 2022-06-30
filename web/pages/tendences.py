@@ -15,15 +15,15 @@ fig3 = temp_plot2.hoursplot     #set the hoursplot
 plots_bottom = dbc.Row([
     dbc.Col([
         html.Div(
-            dcc.Graph(id='days__plot', figure=fig2, className="m-4")
+            dcc.Graph(id='days__plot', figure=fig2, className="m-4", style={'height': '89.5vh'})
         )
-    ],md=6),
+    ],md=12, xl=6),
     dbc.Col([
         html.Div([
-            dcc.Graph(id='hours__plot', figure=fig3, className="m-4")
+            dcc.Graph(id='hours__plot', figure=fig3, className="m-4", style={'height': '89.5vh'})
         ])
-    ],md=6),
-])
+    ],md=12, xl=6)
+    ])
 
 def layout():
     return html.Div(
