@@ -14,25 +14,15 @@ dbc_css = (
     "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 )
 
-app = Dash(__name__, assets_url_path='./assets', external_stylesheets=[url_theme1, dbc_css], plugins=[dl.plugins.pages])
-app.title = 'Tiempos de viaje'
-app.layout = html.Div(
-    [
-        html.Div(page_title.title, className="p-4 mb-2", style={"margin": "10px"}),
-        # html.Div(
-        #     [
-        #         html.Div(
-        #             dcc.Link(f"{page['name']} - {page['path']}", href=page["path"])
-        #         )
-        #         for page in dash.page_registry.values()
-        #         if page["module"] != "pages.not_found_404"
-        #     ]
-        # ),
-        dl.plugins.page_container,
-    ],
-    style={"padding": "0px", "background-color": main_blue}
-)
+app = Dash(
+    __name__,
+    assets_url_path='./assets',
+    external_stylesheets=[url_theme1, dbc_css],
+    plugins=[dl.plugins.pages],
+    suppress_callback_exceptions=True,
+    meta_tags=[{
+        'name': 'viewport',
+        'content': 'width=device-width, initial-scale=1.0'}]
+    )
 
-
-if __name__ == "__main__":
-    app.run_server(debug=True, port=8051)
+server = app.server

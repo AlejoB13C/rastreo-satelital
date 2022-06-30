@@ -2,11 +2,11 @@ from dash import html, dcc
 import dash_bootstrap_components as dbc
 from dash_labs.plugins import register_page
 
-from proyecto_rastreo_satelital_team_56.components import map_plot, temp_plot1, temp_plot2, page_title
+from proyecto_rastreo_satelital_team_56.components import map_plot, temp_plot1, temp_plot2
 from proyecto_rastreo_satelital_team_56.data import import_temp_data
 
 
-register_page(__name__)
+register_page(__name__, name="Map View")
 
 fig = map_plot.map_plot         #Set map plot
 fig2 = temp_plot1.daysplot      #set the daysplot
@@ -105,7 +105,7 @@ plots_bottom = dbc.Row([
 ])
 
 def layout():
-    return dbc.Container(
+    return html.Div(
         [    
             dbc.Row(
                 [
@@ -119,7 +119,5 @@ def layout():
                 ],
             )
         ],
-    className="dbc",
-    fluid=True,
     style={"padding": "0px", "background-color": main_blue}
 )
