@@ -19,7 +19,7 @@ navbar = dbc.NavbarSimple(
         nav=True,
         label="More Pages",
     ),
-    brand="Multi Page App Plugin Demo",
+    brand="Travel Times",
     color="primary",
     dark=True,
     className="mb-2",
@@ -29,16 +29,7 @@ app.title = 'Tiempos de viaje'
 app.layout =  dbc.Container(
     [
         navbar,
-        html.Div(page_title.title, className="p-4 mb-2", style={"margin": "10px"}),
-        # html.Div(
-        #     [
-        #         html.Div(
-        #             dcc.Link(f"{page['name']}", href=page["path"])
-        #         )
-        #         for page in dash.page_registry.values()
-        #         if page["module"] != "pages.not_found_404"
-        #     ]
-        # ),
+        # html.Div(page_title.title, className="p-4 mb-2", style={"margin": "10px"}),
         dl.plugins.page_container,
     ],
     style={"padding": "0px", "background-color": main_blue, "margin": "0px"},
