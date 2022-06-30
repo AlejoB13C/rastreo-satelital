@@ -1,1 +1,1 @@
-web: gunicorn --chdir web app:server
+web: gunicorn  --timeout 600 --chdir web index:server
